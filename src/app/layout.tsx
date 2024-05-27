@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Navbar from "@/components/chunks/Navbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -31,12 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          inter.variable,
-        )}
+        className={cn("bg-background font-sans antialiased", inter.variable)}
       >
-        {children}
+        <Navbar />
+        <div>{children}</div>
       </body>
     </html>
   );
