@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import GoogleLoginButton from "./GoogleLoginButton";
+import GithubLoginButton from "./GithubLoginButton";
 import { getServerSession } from "next-auth";
 
 const Page = async () => {
@@ -26,8 +27,9 @@ const Page = async () => {
             <span className="font-bold text-primary">stusome</span> account
           </CardDescription>
         </div>
-        <CardContent>
+        <CardContent className="flex flex-col items-center gap-2">
           <GoogleLoginButton />
+          <GithubLoginButton />
         </CardContent>
       </Card>
     </WidthWrapper>

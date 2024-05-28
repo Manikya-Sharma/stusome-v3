@@ -1,5 +1,5 @@
 import { withAuth } from "next-auth/middleware";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 // middleware is applied to all routes, use conditionals to select
 
@@ -15,7 +15,7 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ req, token }) => {
-        if (req.nextUrl.pathname.startsWith("/dashboard") && token === null) {
+        if (req.nextUrl.pathname.includes("dashboard") && token === null) {
           return false;
         }
         return true;

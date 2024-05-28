@@ -1,3 +1,6 @@
+"use server";
+
+import { db } from "@/lib/db";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -15,6 +18,28 @@ const handler = NextAuth({
   ],
   pages: {
     signIn: "/login",
+  },
+  callbacks: {
+    async signIn({ email, account, user, credentials, profile }) {
+      if (!user.email || !user.name) return false;
+
+      const existing = await db.account.findFirst({
+        where: {
+          email: user.email,
+        },
+      });
+      if (existing === null) {
+        // new account
+        await db.account.create({
+          data: {
+            email: user.email,
+            name: user.name,
+            imageUrl: user.image,
+          },
+        });
+      }
+      return true;
+    },
   },
 });
 
