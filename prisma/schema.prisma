@@ -8,10 +8,139 @@ datasource db {
 }
 
 model Account {
-  id        Int      @id @default(sequence())
-  email     String
-  imageUrl  String?
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                   Int           @id @default(sequence())
+  username             String
+  email                String
+  profilePic           String?
+  createdAt            DateTime      @default(now())
+  posts                Post[]
+  doubts               Doubt[]
+  comments             Comment[]
+  friendOf             Account[]     @relation("friends")
+  friendWith           Account[]     @relation("friends")
+  sentChatRequests     ChatRequest[] @relation("sender")
+  receivedChatRequests ChatRequest[] @relation("receiver")
+  senderInChats        Chat[]        @relation("ChatSender")
+  chatReceiver         Chat[]        @relation("ChatReceiver")
+  guilds               Guild[]
+}
+
+model Post {
+  id         Int       @id @default(sequence())
+  title      String
+  author     Account   @relation(fields: [accountId], references: [id])
+  accountId  Int
+  comments   Comment[]
+  content    String
+  likes      Int       @default(0)
+  tags       String[]
+  titleImage String?
+  guild      Guild?    @relation(fields: [guildId], references: [id])
+  guildId    Int?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
+}
+
+model Doubt {
+  id         Int       @id @default(sequence())
+  title      String
+  author     Account   @relation(fields: [accountId], references: [id])
+  accountId  Int
+  comments   Comment[]
+  content    String
+  likes      Int       @default(0)
+  tags       String[]
+  titleImage String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime? @updatedAt
+}
+
+model Comment {
+  id              Int       @id @default(sequence())
+  content         String
+  author          Account   @relation(fields: [accountId], references: [id])
+  accountId       Int
+  parentCommentId Int?
+  parentComment   Comment?  @relation("nestedComments", fields: [parentCommentId], references: [id])
+  subComments     Comment[] @relation("nestedComments")
+  post            Post?     @relation(fields: [postId], references: [id])
+  postId          Int?
+  doubt           Doubt?    @relation(fields: [doubtId], references: [id])
+  doubtId         Int?
+  event           Event?    @relation(fields: [eventId], references: [id])
+  eventId         Int?
+  poll            Poll?     @relation(fields: [pollId], references: [id])
+  pollId          Int?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime? @updatedAt
+}
+
+model ChatRequest {
+  id                Int               @id @default(sequence())
+  sender            Account           @relation("sender", fields: [senderAccountId], references: [id])
+  receiver          Account           @relation("receiver", fields: [receiverAccountId], references: [id])
+  senderAccountId   Int
+  receiverAccountId Int
+  status            ChatRequestStatus @default(Waiting)
+  createdAt         DateTime          @default(now())
+}
+
+enum ChatRequestStatus {
+  Waiting
+  Accepted
+  Rejected
+}
+
+model Chat {
+  id                Int           @id @default(sequence())
+  sender            Account       @relation("ChatSender", fields: [senderAccountId], references: [id])
+  receiver          Account       @relation("ChatReceiver", fields: [receiverAccountId], references: [id])
+  senderAccountId   Int
+  receiverAccountId Int
+  chats             ChatMessage[]
+  createdAt         DateTime      @default(now())
+}
+
+model ChatMessage {
+  id         Int      @id @default(sequence())
+  isBySender Boolean
+  message    String
+  chat       Chat?    @relation(fields: [chatId], references: [id])
+  chatId     Int?
+  createdAt  DateTime @default(now())
+}
+
+model Guild {
+  id          Int      @id @default(sequence())
+  name        String
+  description String
+  posts       Post[]
+  events      Event[]
+  polls       Poll[]
+  account     Account? @relation(fields: [accountId], references: [id])
+  accountId   Int?
+  createdAt   DateTime @default(now())
+}
+
+model Event {
+  id         Int       @id @default(sequence())
+  name       String
+  comments   Comment[]
+  likes      Int       @default(0)
+  content    String
+  guild      Guild?    @relation(fields: [guildId], references: [id])
+  guildId    Int?
+  createdAt  DateTime  @default(now())
+  titleImage String?
+}
+
+model Poll {
+  id          Int       @id @default(sequence())
+  description String
+  comments    Comment[]
+  likes       Int       @default(0)
+  options     String[]
+  guild       Guild?    @relation(fields: [guildId], references: [id])
+  guildId     Int?
+  createdAt   DateTime  @default(now())
 }

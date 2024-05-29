@@ -33,8 +33,8 @@ const handler = NextAuth({
         await db.account.create({
           data: {
             email: user.email,
-            name: user.name,
-            imageUrl: user.image,
+            username: user.name,
+            profilePic: user.image,
           },
         });
       }
