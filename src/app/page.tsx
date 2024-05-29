@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
-    <main className="mt-24">
+    <main>
       <WidthWrapper className="flex flex-col items-start gap-5 md:gap-7 lg:gap-10">
         {/* Hero */}
         <section>

@@ -39,7 +39,7 @@ export default async function RootLayout({
       >
         <Provider session={session}>
           <Navbar />
-          <div>{children}</div>
+          <div className="mt-24 min-h-[calc(100vh-829px)]">{children}</div>
         </Provider>
       </body>
     </html>
