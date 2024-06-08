@@ -13,7 +13,7 @@ const Navbar = () => {
   const { data: session } = useSession();
   const pathname = usePathname();
   return (
-    <nav className="absolute inset-x-0 top-0 border-b border-zinc-300 bg-white/50 py-3 backdrop-blur-sm md:fixed">
+    <nav className="absolute inset-x-0 top-0 z-50 border-b border-zinc-300 bg-white/50 py-3 backdrop-blur-sm md:fixed">
       <WidthWrapper className="flex items-center justify-between">
         <Link
           href="/"

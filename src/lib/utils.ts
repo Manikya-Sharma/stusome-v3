@@ -1,6 +1,7 @@
 import { Account } from "@prisma/client";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import date from "date-and-time";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -28,4 +29,8 @@ export function get_username_and_id(slug: string): {
     username: arr[0],
     id,
   };
+}
+
+export function formatDate(input_date: Date) {
+  return date.format(input_date, "MMM DD, YYYY");
 }
