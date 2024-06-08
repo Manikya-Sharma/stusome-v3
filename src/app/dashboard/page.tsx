@@ -21,6 +21,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getServerSession } from "next-auth";
+import { notFound } from "next/navigation";
 
 type FetchedAccount = Prisma.AccountGetPayload<{
   include: { posts: true; doubts: true; guilds: true; friendOf: true };
@@ -183,41 +185,38 @@ const PostsSection = ({
 };
 
 const Page = () => {
-  const { data: session } = useSession();
-  const email = session?.user?.email;
-  let account: FetchedAccount = null;
-  let accountInfoLoading = null;
-  if (email) {
-    const { data: fetchedAccount, isLoading } = useQuery({
-      queryKey: ["fetch-account"],
-      queryFn: async () => {
-        return await fetchUser({ email });
-      },
-      retry: true,
-      retryDelay: 1000,
-    });
-    account = fetchedAccount ?? null;
-    accountInfoLoading = isLoading;
+  const { data: account, isLoading } = useQuery({
+    queryKey: ["fetch-account"],
+    queryFn: async () => {
+      return await fetchUser();
+    },
+    retry: true,
+    retryDelay: 500,
+  });
+  if (isLoading) {
+    return (
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 space-y-3 text-center">
+        <Loader2 className="mx-auto h-10 w-10 animate-spin text-primary" />
+        <div className="inset-x-0 max-w-prose text-muted-foreground">
+          Please wait while we fetch your data
+        </div>
+      </div>
+    );
+  }
+  if (!account) {
+    // no one without account can see this page
+    return notFound();
   }
   return (
     <main className="mx-5 grid grid-cols-7 gap-5">
       <section className="col-span-2 hidden rounded-lg bg-zinc-100 px-5 py-7 md:block">
-        <GuildsSection
-          account={account}
-          accountInfoLoading={accountInfoLoading}
-        />
+        <GuildsSection account={account} accountInfoLoading={isLoading} />
       </section>
       <section className="col-span-3 rounded-lg bg-zinc-100 px-5 py-7">
-        <PostsSection
-          account={account}
-          accountInfoLoading={accountInfoLoading}
-        />
+        <PostsSection account={account} accountInfoLoading={isLoading} />
       </section>
       <section className="col-span-2 hidden rounded-lg bg-zinc-100 px-5 py-7 @container md:block">
-        <ProfileSection
-          account={account}
-          accountInfoLoading={accountInfoLoading}
-        />
+        <ProfileSection account={account} accountInfoLoading={isLoading} />
       </section>
     </main>
   );
