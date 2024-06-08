@@ -33,7 +33,7 @@ const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
       return notFound();
     }
     return (
-      <div className="@container min-h-screen w-full">
+      <div className="min-h-screen w-full @container">
         <Profile account={account} />
       </div>
     );
