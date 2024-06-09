@@ -1,10 +1,9 @@
+import { formatDate } from "@/lib/utils";
+import type { Prisma } from "@prisma/client";
+import { User2 } from "lucide-react";
 import Image from "next/image";
 import WidthWrapper from "./chunks/WidthWrapper";
-import { User2 } from "lucide-react";
 import { Table, TableBody, TableCell, TableRow } from "./ui/table";
-import date from "date-and-time";
-import type { Account, Post, Prisma } from "@prisma/client";
-import { formatDate } from "@/lib/utils";
 
 const Profile = ({
   account,
@@ -29,7 +28,7 @@ const Profile = ({
               <User2 className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 -translate-y-1/2" />
             )}
           </div>
-          <h1 className="text-4xl">{account.username}</h1>
+          <h1 className="text-center text-4xl">{account.username}</h1>
           <p className="text-center text-sm text-muted-foreground">
             User since {formatDate(account.createdAt)}
           </p>
