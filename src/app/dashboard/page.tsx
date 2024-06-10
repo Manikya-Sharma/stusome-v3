@@ -33,7 +33,7 @@ const ProfileSection = ({
   return (
     <>
       {account ? (
-        <Profile account={account} />
+        <Profile account={account} isContainer />
       ) : accountInfoLoading ? (
         <div className="my-5 flex w-full flex-col items-center justify-center gap-2">
           <Loader2 className="h-6 w-6 animate-spin" />
