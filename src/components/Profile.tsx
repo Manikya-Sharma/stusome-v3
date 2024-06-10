@@ -1,12 +1,15 @@
 import { cn, formatDate } from "@/lib/utils";
 import type { Prisma } from "@prisma/client";
-import { User2 } from "lucide-react";
+import { User2, UserCog2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import WidthWrapper from "./chunks/WidthWrapper";
-import { Table, TableBody, TableCell, TableRow } from "./ui/table";
 import ChartGraph from "./profile/ChartGraph";
+import { buttonVariants } from "./ui/button";
+import { Table, TableBody, TableCell, TableRow } from "./ui/table";
+import { getServerSession } from "next-auth";
 
-const Profile = ({
+const Profile = async ({
   account,
   isContainer,
 }: {
@@ -15,6 +18,8 @@ const Profile = ({
   }>;
   isContainer?: boolean;
 }) => {
+  const loggedInAccount = await getServerSession();
+
   return (
     <WidthWrapper className="grid grid-cols-1 gap-5 @md:grid-cols-2">
       <div className="row-span-full flex flex-col items-center justify-start">
@@ -40,6 +45,16 @@ const Profile = ({
           <p className="text-center text-sm text-muted-foreground">
             User since {formatDate(account.createdAt)}
           </p>
+          {!isContainer && loggedInAccount?.user?.email === account.email ? (
+            <div className="flex flex-col items-stretch justify-center gap-5">
+              <Link
+                href="edit-account"
+                className={buttonVariants({ variant: "outline" })}
+              >
+                <UserCog2 className="mr-1.5 h-4 w-4" /> Edit account
+              </Link>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="flex flex-col gap-5">
