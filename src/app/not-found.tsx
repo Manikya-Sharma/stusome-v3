@@ -8,7 +8,7 @@ const Page = () => {
       <Meh className="size-1/4" />
       <p className="-mt-2 text-4xl font-semibold">Not Found</p>
       <p className="text-lg text-muted-foreground">
-        You've come at wrong place!
+        You&apos;ve come at wrong place!
       </p>
       <Link href="/" className={buttonVariants({ variant: "secondary" })}>
         <ArrowLeft className="mr-1.5 h-4 w-4" />
