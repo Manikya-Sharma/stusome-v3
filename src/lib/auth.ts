@@ -8,4 +8,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    signIn: async ({ user }) => {
+      if (!user.email) {
+        return false;
+      }
+      return true;
+    },
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub,
+      },
+    }),
+  },
+  pages: {
+    signIn: "/login",
+    signOut: "/login",
+  },
 });

@@ -15,7 +15,7 @@ model User {
   profilePicture String?
   externalId     String      @unique
   preferences    Json
-  accountType    AccountType
+  accountType    AccountType @default(FREE)
 
   posts    Post[]
   modAt    Channel[] @relation("mod")
