@@ -13,6 +13,7 @@ export const profile_post_zod = z
     displayName: z.string().min(4).max(20, "Maximum size allowed is 20"),
     email: z.string().email(),
     externalId: z.string().min(1),
+    profilePicture: z.string().url().optional(),
   })
   .strict();
 

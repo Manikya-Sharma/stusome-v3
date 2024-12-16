@@ -12,10 +12,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import { PROFILE_POST } from "@/types/api-routes/profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
+import { ExternalLink, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -42,9 +43,11 @@ const formType = z.object({
 const LoginSessionRedirection = ({
   email,
   userId,
+  profilePicture,
 }: {
   email: string;
   userId: string;
+  profilePicture: string | undefined;
 }) => {
   const [needsCreation, setNeedsCreation] = useState<boolean>(false);
   const [usernameNotUnique, setUsernameNotUnique] = useState<boolean>(false);
@@ -121,6 +124,7 @@ const LoginSessionRedirection = ({
       email,
       externalId: userId,
       username,
+      profilePicture,
     });
   };
 
@@ -191,13 +195,18 @@ const LoginSessionRedirection = ({
             <p className="mt-5 text-sm text-muted-foreground">
               By creating account, you agree to our{" "}
               <Link
-                className={buttonVariants({
-                  variant: "link",
-                  className: "underline px-0",
-                })}
+                className={cn(
+                  buttonVariants({
+                    variant: "link",
+                    className: "underline",
+                  }),
+                  "px-0"
+                )}
+                target="_blank"
                 href="/toc"
               >
                 Terms and Conditions
+                <ExternalLink className="size-2" />
               </Link>
             </p>
           </div>

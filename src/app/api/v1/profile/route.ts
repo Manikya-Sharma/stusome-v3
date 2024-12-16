@@ -41,7 +41,8 @@ export async function POST(req: NextRequest) {
       }
     );
   }
-  const { displayName, username, email, externalId } = parse.data;
+  const { displayName, username, email, externalId, profilePicture } =
+    parse.data;
 
   const existing = await db.user.findFirst({
     where: {
@@ -65,6 +66,7 @@ export async function POST(req: NextRequest) {
         username,
         email,
         externalId,
+        profilePicture,
         preferences: getDefaultProfilePreferences(),
       },
     });

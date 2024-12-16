@@ -11,6 +11,7 @@ const Page = async () => {
     <div className="relative min-h-screen w-full bg-blue-50">
       {session?.user?.email && session.user.id ? (
         <LoginSessionRedirection
+          profilePicture={session.user.image ?? undefined}
           email={session.user.email}
           userId={session.user.id}
         />
