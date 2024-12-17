@@ -1,12 +1,12 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import CustomButton from "./ui/CustomButton";
-import { usePathname } from "next/navigation";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import CustomButton from "./ui/CustomButton";
 
 const Navbar = ({
   withoutButtons,
@@ -36,18 +36,19 @@ const Navbar = ({
       {!withoutButtons && (
         <div>
           {session?.user?.email ? (
-            <>
+            <div className="group">
               <Link
-                className={buttonVariants({ variant: "default" })}
+                className={buttonVariants({
+                  variant: "default",
+                  className: "custom-gradient",
+                  size: "lg",
+                })}
                 href="/dashboard"
               >
                 Dashboard
-              </Link>{" "}
-              {/* TODO: remove logout from here and move to profile popover */}
-              <Button variant="secondary" onClick={() => signOut()}>
-                Logout
-              </Button>
-            </>
+                <ArrowRight className="ml-1.5 size-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           ) : (
             <CustomButton
               className="group flex items-center"

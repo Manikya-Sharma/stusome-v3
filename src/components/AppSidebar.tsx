@@ -136,7 +136,7 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenuButton asChild>
               <Button
                 variant="destructive"
-                className="bg-sidebar border border-red-400 text-red-400 hover:text-sidebar hover:bg-red-400"
+                className="block bg-sidebar border border-red-400 text-red-400 hover:text-sidebar"
               >
                 <LogOut className="mr-1.5 size-5 group-data-[collapsible=icon]:mr-0" />
                 <span>Logout</span>

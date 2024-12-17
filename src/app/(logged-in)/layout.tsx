@@ -5,6 +5,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { notFound } from "next/navigation";
+import Pathname from "./Pathname";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
@@ -27,9 +28,15 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     <div>
       <SidebarProvider>
         <AppSidebar user={user} />
-        <main>
-          <SidebarTrigger />
-          {children}
+        <main className="w-full">
+          <div className="flex items-center gap-2 py-2">
+            <SidebarTrigger />
+            <h1 className="text-xl font-semibold tracking-tight">
+              <Pathname />
+            </h1>
+          </div>
+
+          <div className="h-[calc(100vh-52px)] overflow-y-auto">{children}</div>
         </main>
       </SidebarProvider>
     </div>

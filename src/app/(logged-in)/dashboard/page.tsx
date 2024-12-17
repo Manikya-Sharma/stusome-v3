@@ -1,5 +1,7 @@
+import DashboardContent from "./DashboardContent";
+
 const Page = () => {
-  return <div></div>;
+  return <DashboardContent />;
 };
 
 export default Page;
