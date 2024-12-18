@@ -12,19 +12,23 @@ const BentoElem = ({
   children: React.ReactNode;
 }) => {
   return (
-    <section className="relative p-3 h-full">
-      <h2 className="flex items-center justify-between">
-        <span className="text-lg tracking-tight font-semibold">{heading}</span>
-        <Link
-          href={address}
-          className={buttonVariants({ variant: "ghost" })}
-          aria-label={`Open all ${heading}`}
-        >
-          <ArrowRight className="size-4" />
-        </Link>
-      </h2>
-      <div className="h-px w-full my-3 bg-black/10" />
-      <div className="h-[55%] overflow-auto">{children}</div>
+    <section className="relative pt-0 p-3 h-full overflow-auto">
+      <div className="sticky top-0 z-10 bg-slate-50">
+        <h2 className="flex pt-3 items-center justify-between">
+          <span className="text-lg tracking-tight font-semibold">
+            {heading}
+          </span>
+          <Link
+            href={address}
+            className={buttonVariants({ variant: "ghost" })}
+            aria-label={`Open all ${heading}`}
+          >
+            <ArrowRight className="size-4" />
+          </Link>
+        </h2>
+        <div className="h-px w-full my-3 bg-black/10" />
+      </div>
+      <div>{children}</div>
     </section>
   );
 };
