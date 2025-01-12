@@ -4,7 +4,7 @@ import AppSidebar from "@/components/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Pathname from "./Pathname";
 import ThemeSwitch from "@/components/ThemeSwitch";
 
@@ -22,7 +22,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   });
 
   if (!user) {
-    return notFound();
+    return redirect("/login");
   }
 
   return (
