@@ -5,8 +5,8 @@ const CustomButton = ({ children, className, ...props }: ButtonProps) => {
   return (
     <button
       className={cn(
-        "custom-gradient px-7 py-3 text-base block rounded-lg bg-primary text-primary-foreground focus:ring-2 ring-violet-500 ring-offset-2 focus-visible:outline-none",
-        className
+        "custom-gradient block rounded-lg bg-primary px-7 py-3 text-base text-primary-foreground ring-violet-500 ring-offset-2 focus:ring-2 focus-visible:outline-none",
+        className,
       )}
       {...props}
     >

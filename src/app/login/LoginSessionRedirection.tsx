@@ -28,7 +28,7 @@ const formType = z.object({
     .string()
     .regex(
       /^[a-zA-Z0-9_]+$/,
-      "Username can only consist of numbers, letters and underscores"
+      "Username can only consist of numbers, letters and underscores",
     )
     .min(4, "Username must have at-least 4 characters")
     // Is 15 really sufficient?
@@ -72,7 +72,7 @@ const LoginSessionRedirection = ({
         console.error(
           `Error: status code ${res.status} | message: ${
             (await res.json()).message
-          }`
+          }`,
         );
       }
       return {};
@@ -99,7 +99,7 @@ const LoginSessionRedirection = ({
         throw new Error(
           `Error: status code ${res.status} | message: ${
             (await res.json()).message
-          }`
+          }`,
         );
       }
     },
@@ -129,7 +129,7 @@ const LoginSessionRedirection = ({
   };
 
   return (
-    <main className="px-5 absolute mt-7 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[70vw] h-[85vh] bg-white dark:bg-zinc-800 rounded-lg flex items-center justify-center">
+    <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg bg-white px-5 dark:bg-zinc-800">
       {isLoading && (
         <div className="flex flex-col items-center justify-center gap-3">
           <Loader2 className="size-8 animate-spin" />
@@ -144,7 +144,7 @@ const LoginSessionRedirection = ({
           </div>
         ) : (
           <div className="w-full max-w-prose">
-            <h1 className="font-semibold text-4xl tracking-tight mb-16">
+            <h1 className="mb-16 text-4xl font-semibold tracking-tight">
               Almost there...
             </h1>
             <Form {...form}>
@@ -200,7 +200,7 @@ const LoginSessionRedirection = ({
                     variant: "link",
                     className: "underline",
                   }),
-                  "px-0"
+                  "px-0",
                 )}
                 target="_blank"
                 href="/toc"

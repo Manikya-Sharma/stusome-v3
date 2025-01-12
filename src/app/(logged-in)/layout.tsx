@@ -35,7 +35,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             <h1 className="text-xl font-semibold tracking-tight">
               <Pathname />
             </h1>
-            <div className="w-fit ml-auto px-5">
+            <div className="ml-auto w-fit px-5">
               <ThemeSwitch />
             </div>
           </div>

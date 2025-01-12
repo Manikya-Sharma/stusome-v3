@@ -21,8 +21,8 @@ const Navbar = ({
   return (
     <nav
       className={cn(
-        "flex items-center justify-between py-5 px-3 bg-white/60 dark:bg-black/60 backdrop-blur-sm",
-        className
+        "flex items-center justify-between bg-white/60 px-3 py-5 backdrop-blur-sm dark:bg-black/60",
+        className,
       )}
     >
       <div>
@@ -49,7 +49,7 @@ const Navbar = ({
                   href="/dashboard"
                 >
                   Dashboard
-                  <ArrowRight className="ml-1.5 size-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             ) : (
@@ -62,7 +62,7 @@ const Navbar = ({
                 }
               >
                 Login
-                <ArrowRight className="inline-block ml-1.5 size-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-1.5 inline-block size-4 transition-transform group-hover:translate-x-1" />
               </CustomButton>
             )}
           </div>

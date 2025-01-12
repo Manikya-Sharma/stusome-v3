@@ -31,10 +31,10 @@ const AppSidebar = ({ user }: { user: User }) => {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem className="group-data-[collapsible=icon]:hidden">
-            <div className="h-auto w-full p-3 border border-gray-400 rounded-lg bg-white dark:bg-zinc-900 dark:border-gray-600 flex items-center justify-between">
+            <div className="flex h-auto w-full items-center justify-between rounded-lg border border-gray-400 bg-white p-3 dark:border-gray-600 dark:bg-zinc-900">
               <div className="flex flex-col gap-1 group-data-[collapsible=icon]:hidden">
                 <span>{user.displayName}</span>
-                <span className="text-muted-foreground text-sm">
+                <span className="text-sm text-muted-foreground">
                   @ {user.username}
                 </span>
               </div>
@@ -100,7 +100,7 @@ const AppSidebar = ({ user }: { user: User }) => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <Separator className="group-data-[collapsible=icon]:block hidden" />
+        <Separator className="hidden group-data-[collapsible=icon]:block" />
         <SidebarGroup>
           <SidebarGroupLabel>Settings</SidebarGroupLabel>
           <SidebarGroupContent>

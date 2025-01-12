@@ -6,7 +6,7 @@ export const profile_post_zod = z
       .string()
       .regex(
         /^[a-zA-Z0-9_]+$/,
-        "Username can only consist of numbers, letters and underscores"
+        "Username can only consist of numbers, letters and underscores",
       )
       .min(4)
       .max(15, "Maximum size allowed is 15"),

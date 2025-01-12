@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
       { message: "Invalid request. Must provide email" },
       {
         status: 400,
-      }
+      },
     );
   }
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
   const { displayName, username, email, externalId, profilePicture } =
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
       { message: "User already exists" },
       {
         status: 400,
-      }
+      },
     );
   }
 
@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
       if (e.code === "P2002") {
         return NextResponse.json(
           { message: "username not unique" },
-          { status: 400 }
+          { status: 400 },
         );
       }
     }

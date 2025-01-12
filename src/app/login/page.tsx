@@ -18,12 +18,12 @@ const Page = async () => {
       ) : (
         <>
           <Navbar className="bg-transparent" withoutButtons />
-          <main className="absolute mt-7 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[90vw] md:w-[70vw] h-[85vh] bg-white dark:bg-zinc-800 rounded-sm flex">
-            <div className="pt-20 px-10 flex-1">
-              <h1 className="font-semibold text-4xl tracking-tight">
+          <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-sm bg-white dark:bg-zinc-800 md:w-[70vw]">
+            <div className="flex-1 px-10 pt-20">
+              <h1 className="text-4xl font-semibold tracking-tight">
                 Welcome to Stusome
               </h1>
-              <p className="mt-2 text-muted-foreground text-sm tracking-wide">
+              <p className="mt-2 text-sm tracking-wide text-muted-foreground">
                 Begin your journey to a{" "}
                 <span className="text-blue-500 dark:text-blue-300">better</span>{" "}
                 social media
@@ -37,7 +37,7 @@ const Page = async () => {
                   className={buttonVariants({
                     variant: "link",
                     size: "sm",
-                    className: "underline px-0",
+                    className: "px-0 underline",
                   })}
                   href="/toc"
                 >
@@ -45,9 +45,9 @@ const Page = async () => {
                 </Link>
               </p>
             </div>
-            <div className="hidden md:block flex-[1.5]">
+            <div className="hidden flex-[1.5] md:block">
               {/* TODO: Replace div with image */}
-              <div className="w-full h-full bg-slate-300 dark:bg-black rounded-tl-[7rem] rounded-sm" />
+              <div className="h-full w-full rounded-sm rounded-tl-[7rem] bg-slate-300 dark:bg-black" />
             </div>
           </main>
         </>
