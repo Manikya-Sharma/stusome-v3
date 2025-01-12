@@ -3,8 +3,8 @@ import BentoElem from "./BentoElem";
 
 const DashboardContent = () => {
   return (
-    <div className="h-full p-5 grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2 rounded-lg gap-3">
-      <div className="rounded-t-2xl md:rounded-tr-[1%] md:rounded-tl-2xl rounded-[1%] ring-1 ring-black/20 bg-slate-50">
+    <div className="h-full p-5 grid grid-cols-1 grid-rows-4 md:grid-cols-2 md:grid-rows-2 rounded-lg gap-3 dark:bg-zinc-900">
+      <div className="rounded-t-2xl md:rounded-tr-[1%] md:rounded-tl-2xl rounded-[1%] ring-1 ring-black/20 dark:ring-white/10 bg-slate-50 dark:bg-zinc-950">
         <BentoElem address="/channels" heading="Channels">
           <ChannelsList
             channels={[
@@ -26,7 +26,7 @@ const DashboardContent = () => {
           />
         </BentoElem>
       </div>
-      <div className="md:rounded-tr-2xl rounded-[1%] ring-1 ring-black/20 bg-slate-50">
+      <div className="md:rounded-tr-2xl rounded-[1%] ring-1 ring-black/20 dark:ring-white/10 bg-slate-50 dark:bg-zinc-950">
         <BentoElem address="/posts" heading="Posts">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit
           accusamus quasi dolores deleniti ea eligendi sapiente laboriosam
@@ -35,7 +35,7 @@ const DashboardContent = () => {
           enim at quae! Et rem quos laudantium neque ipsum delectus! Quisquam.
         </BentoElem>
       </div>
-      <div className="md:rounded-bl-2xl rounded-[1%] ring-1 ring-black/20 bg-slate-50">
+      <div className="md:rounded-bl-2xl rounded-[1%] ring-1 ring-black/20 dark:ring-white/10 bg-slate-50 dark:bg-zinc-950">
         <BentoElem address="/stats" heading="Statistics">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit
           accusamus quasi dolores deleniti ea eligendi sapiente laboriosam
@@ -44,7 +44,7 @@ const DashboardContent = () => {
           enim at quae! Et rem quos laudantium neque ipsum delectus! Quisquam.
         </BentoElem>
       </div>
-      <div className="rounded-b-2xl md:rounded-bl-[1%] md:rounded-br-2xl rounded-[1%] ring-1 ring-black/20 bg-slate-50">
+      <div className="rounded-b-2xl md:rounded-bl-[1%] md:rounded-br-2xl rounded-[1%] ring-1 ring-black/20 dark:ring-white/10 bg-slate-50 dark:bg-zinc-950">
         <BentoElem address="/app-settings" heading="App Settings">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit
           accusamus quasi dolores deleniti ea eligendi sapiente laboriosam

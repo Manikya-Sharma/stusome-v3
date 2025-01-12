@@ -129,7 +129,7 @@ const LoginSessionRedirection = ({
   };
 
   return (
-    <main className="px-5 absolute mt-7 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[70vw] h-[85vh] bg-white flex items-center justify-center">
+    <main className="px-5 absolute mt-7 top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-[70vw] h-[85vh] bg-white dark:bg-zinc-800 rounded-lg flex items-center justify-center">
       {isLoading && (
         <div className="flex flex-col items-center justify-center gap-3">
           <Loader2 className="size-8 animate-spin" />

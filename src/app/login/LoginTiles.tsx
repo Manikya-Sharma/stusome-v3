@@ -10,7 +10,7 @@ const LoginTiles = () => {
   return (
     <div className="flex flex-col items-center gap-5">
       <Button
-        className="hover:bg-slate-800 hover:text-white border border-slate-800"
+        className="hover:bg-slate-800 hover:text-white border border-slate-800 dark:border-slate-500 dark:hover:bg-slate-600"
         size="lg"
         variant="secondary"
         onClick={async () => {

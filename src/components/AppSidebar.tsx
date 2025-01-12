@@ -11,10 +11,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import type { User } from "@prisma/client";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   ChartScatter,
-  LogOut,
   NotebookText,
   Orbit,
   Palette,
@@ -23,7 +21,8 @@ import {
   UserRoundCog,
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import LogoutButton from "./LogoutButton";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 
 const AppSidebar = ({ user }: { user: User }) => {
@@ -32,7 +31,7 @@ const AppSidebar = ({ user }: { user: User }) => {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem className="group-data-[collapsible=icon]:hidden">
-            <div className="h-auto w-full p-3 border border-gray-400 rounded-lg bg-white flex items-center justify-between">
+            <div className="h-auto w-full p-3 border border-gray-400 rounded-lg bg-white dark:bg-zinc-900 dark:border-gray-600 flex items-center justify-between">
               <div className="flex flex-col gap-1 group-data-[collapsible=icon]:hidden">
                 <span>{user.displayName}</span>
                 <span className="text-muted-foreground text-sm">
@@ -134,13 +133,7 @@ const AppSidebar = ({ user }: { user: User }) => {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <Button
-                variant="destructive"
-                className="block bg-sidebar border border-red-400 text-red-400 hover:text-sidebar"
-              >
-                <LogOut className="mr-1.5 size-5 group-data-[collapsible=icon]:mr-0" />
-                <span>Logout</span>
-              </Button>
+              <LogoutButton />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -13,7 +13,7 @@ const BentoElem = ({
 }) => {
   return (
     <section className="relative pt-0 p-3 h-full overflow-auto">
-      <div className="sticky top-0 z-10 bg-slate-50">
+      <div className="sticky top-0 z-10 bg-slate-50 dark:bg-zinc-950">
         <h2 className="flex pt-3 items-center justify-between">
           <span className="text-lg tracking-tight font-semibold">
             {heading}
@@ -26,7 +26,7 @@ const BentoElem = ({
             <ArrowRight className="size-4" />
           </Link>
         </h2>
-        <div className="h-px w-full my-3 bg-black/10" />
+        <div className="h-px w-full my-3 bg-black/10 dark:bg-white/40" />
       </div>
       <div>{children}</div>
     </section>
