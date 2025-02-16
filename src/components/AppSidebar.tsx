@@ -5,7 +5,6 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -28,14 +27,14 @@ import { Separator } from "./ui/separator";
 const AppSidebar = ({ user }: { user: User }) => {
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem className="group-data-[collapsible=icon]:hidden">
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupContent className="group-data-[collapsible=icon]:hidden">
             <div className="flex h-auto w-full items-center justify-between rounded-lg border border-gray-400 bg-white p-3 dark:border-gray-600 dark:bg-zinc-900">
               <div className="flex flex-col gap-1 group-data-[collapsible=icon]:hidden">
                 <span>{user.displayName}</span>
                 <span className="text-sm text-muted-foreground">
-                  @ {user.username}
+                  @{user.username}
                 </span>
               </div>
               <Avatar className="group-data-[collapsible=icon]:size-5">
@@ -45,10 +44,9 @@ const AppSidebar = ({ user }: { user: User }) => {
                 </AvatarFallback>
               </Avatar>
             </div>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarHeader>
-      <SidebarContent>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
         <SidebarGroup>
           <SidebarGroupLabel>You</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -130,13 +128,15 @@ const AppSidebar = ({ user }: { user: User }) => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <LogoutButton />
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <SidebarContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <LogoutButton />
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarContent>
       </SidebarFooter>
     </Sidebar>
   );

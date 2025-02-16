@@ -1,9 +1,8 @@
-import Navbar from "../../components/Navbar";
-import LoginTiles from "./LoginTiles";
-import LoginSessionRedirection from "./LoginSessionRedirection";
 import { auth } from "@/lib/auth";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
+import Navbar from "../../components/Navbar";
+import LoginSessionRedirection from "./LoginSessionRedirection";
+import LoginTiles from "./LoginTiles";
 
 const Page = async () => {
   const session = await auth();
@@ -34,12 +33,8 @@ const Page = async () => {
               <p className="absolute bottom-10 text-sm text-muted-foreground">
                 By continuing, you agree to our{" "}
                 <Link
-                  className={buttonVariants({
-                    variant: "link",
-                    size: "sm",
-                    className: "px-0 underline",
-                  })}
                   href="/toc"
+                  className="text-blue-500 underline hover:no-underline dark:text-blue-400"
                 >
                   Terms and Conditions
                 </Link>

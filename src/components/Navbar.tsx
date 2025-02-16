@@ -1,5 +1,7 @@
 "use client";
 
+import dynamic from "next/dynamic";
+
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -21,14 +23,14 @@ const Navbar = ({
   return (
     <nav
       className={cn(
-        "flex items-center justify-between bg-white/60 px-3 py-5 backdrop-blur-sm dark:bg-black/60",
+        "flex items-center justify-between bg-white/60 px-3 py-5 backdrop-blur-sm dark:bg-transparent",
         className,
       )}
     >
       <div>
         <Link href="/">
           <img
-            src="logo-full-tx.png"
+            src="/logo-full-tx.png"
             className="aspect-[400/150] w-40"
             aria-label="stusome logo"
           />
@@ -72,4 +74,4 @@ const Navbar = ({
   );
 };
 
-export default Navbar;
+export default dynamic(() => Promise.resolve(Navbar), { ssr: false });
