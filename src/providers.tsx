@@ -1,11 +1,9 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider as NextThemeProvider } from "next-themes";
 import { Toaster } from "./components/ui/toaster";
-
-const queryClient = new QueryClient();
+import { TRPCProvider } from "./lib/trpc/client";
 
 export const Providers = ({
   children,
@@ -14,7 +12,7 @@ export const Providers = ({
   children: React.ReactNode;
 }) => {
   return (
-    <QueryClientProvider client={queryClient}>
+    <TRPCProvider>
       <Toaster />
       <SessionProvider>
         <NextThemeProvider
@@ -27,6 +25,6 @@ export const Providers = ({
           {children}
         </NextThemeProvider>
       </SessionProvider>
-    </QueryClientProvider>
+    </TRPCProvider>
   );
 };

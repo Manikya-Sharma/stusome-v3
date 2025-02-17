@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const profile_post_zod = z
+export const createProfileValidator = z
   .object({
     username: z
       .string()
@@ -17,4 +17,4 @@ export const profile_post_zod = z
   })
   .strict();
 
-export type PROFILE_POST = z.infer<typeof profile_post_zod>;
+export type PROFILE_POST = z.infer<typeof createProfileValidator>;

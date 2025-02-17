@@ -12,32 +12,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { trpc } from "@/lib/trpc/client";
 import { cn } from "@/lib/utils";
-import { PROFILE_POST } from "@/types/api-routes/profile";
+import {
+  newAccountFormValidator,
+  NewAccountFormValidatorType,
+} from "@/types/form-validators/account-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ExternalLink, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-const formType = z.object({
-  username: z
-    .string()
-    .regex(
-      /^[a-zA-Z0-9_]+$/,
-      "Username can only consist of numbers, letters and underscores",
-    )
-    .min(4, "Username must have at-least 4 characters")
-    // Is 15 really sufficient?
-    .max(15, "Maximum size allowed is 15"),
-  displayName: z
-    .string()
-    .min(4, "Display Name must have at-least 4 characters")
-    .max(20, "Maximum size allowed is 20"),
-});
 
 // The purpose is to ensure that logged in use is in the database
 const LoginSessionRedirection = ({
@@ -49,76 +36,52 @@ const LoginSessionRedirection = ({
   userId: string;
   profilePicture: string | undefined;
 }) => {
+  // state to determine if the user needs to create a new account for our database
   const [needsCreation, setNeedsCreation] = useState<boolean>(false);
+  // state to determine if the username entered is unique
   const [usernameNotUnique, setUsernameNotUnique] = useState<boolean>(false);
+  // state to determine if the account creation is completed and redirection is needed
+  const [completed, setCompleted] = useState<boolean>(false);
 
   const router = useRouter();
-  const queryClient = useQueryClient();
-
   const params = useSearchParams();
   const callbackUrl = params.get("callbackUrl");
 
-  const { isLoading } = useQuery({
-    queryKey: ["profile", email],
-    queryFn: async () => {
-      const res = await fetch(`/api/v1/profile?email=${email}`);
-      if (res.status === 200) {
-        // account found successfully
-        router.push(callbackUrl ?? "/dashboard");
-      } else if (res.status === 404) {
-        // we need to create a new account
+  const { isLoading, status } = trpc.authRouter.getProfile.useQuery();
+  const { mutate: createAccount, status: mutationStatus } =
+    trpc.authRouter.createProfile.useMutation();
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (status !== "success") {
         setNeedsCreation(true);
       } else {
-        console.error(
-          `Error: status code ${res.status} | message: ${
-            (await res.json()).message
-          }`,
-        );
+        router.push(callbackUrl ?? "/dashboard");
       }
-      return {};
-    },
-  });
+    }
+  }, [isLoading, callbackUrl, router, status]);
+  useEffect(() => {
+    if (mutationStatus === "error") {
+      setUsernameNotUnique(true);
+    } else if (mutationStatus === "success") {
+      setUsernameNotUnique(false);
+      setCompleted(true);
+      router.push(callbackUrl ?? "/dashboard");
+    }
+  }, [mutationStatus, callbackUrl, router]);
 
-  const { mutate: createAccount, isPending: isCreating } = useMutation({
-    mutationFn: async (data: PROFILE_POST) => {
-      const res = await fetch("/api/v1/profile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      if (res.status === 400) {
-        const { message } = await res.json();
-        if (message === "username not unique") {
-          setUsernameNotUnique(true);
-        }
-        return;
-      }
-      if (res.status !== 200) {
-        throw new Error(
-          `Error: status code ${res.status} | message: ${
-            (await res.json()).message
-          }`,
-        );
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["profile", email],
-      });
-    },
-  });
-
-  const form = useForm<z.infer<typeof formType>>({
-    resolver: zodResolver(formType),
+  const form = useForm<NewAccountFormValidatorType>({
+    resolver: zodResolver(newAccountFormValidator),
     defaultValues: {
       displayName: "",
       username: "",
     },
   });
 
-  const onSubmit = ({ username, displayName }: z.infer<typeof formType>) => {
+  const onSubmit = ({
+    username,
+    displayName,
+  }: z.infer<typeof newAccountFormValidator>) => {
     createAccount({
       displayName,
       email,
@@ -130,14 +93,14 @@ const LoginSessionRedirection = ({
 
   return (
     <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg bg-white px-5 dark:bg-zinc-800">
-      {isLoading && (
+      {status === "pending" && !needsCreation && (
         <div className="flex flex-col items-center justify-center gap-3">
           <Loader2 className="size-8 animate-spin" />
           <p>Loading...</p>
         </div>
       )}
       {needsCreation ? (
-        isCreating ? (
+        completed ? (
           <div className="flex flex-col items-center justify-center gap-3">
             <Loader2 className="size-8 animate-spin" />
             <p>Creating your account...</p>
