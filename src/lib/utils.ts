@@ -8,3 +8,6 @@ export function cn(...inputs: ClassValue[]) {
 export function getDefaultProfilePreferences() {
   return {};
 }
+export function getDefaultChannelPermissions() {
+  return {};
+}

@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
 import { Moon, Sun } from "lucide-react";
+import dynamic from "next/dynamic";
 
 const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
@@ -21,4 +22,4 @@ const ThemeSwitch = () => {
   );
 };
 
-export default ThemeSwitch;
+export default dynamic(() => Promise.resolve(ThemeSwitch), { ssr: false });

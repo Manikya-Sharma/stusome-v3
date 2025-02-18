@@ -1,18 +1,9 @@
 import { cache } from "react";
 import { auth } from "../auth";
-import { db } from "../db";
 
 export const createTRPCContext = cache(async () => {
-  const user = await auth();
-  if (!user || !user.user || !user.user.email) {
-    return { user: null };
-  }
-  const data = await db.user.findFirst({
-    where: {
-      email: user.user?.email,
-    },
-  });
-  return { user: data };
+  const session = await auth();
+  return { session };
 });
 
 export type Context = Awaited<ReturnType<typeof createTRPCContext>>;

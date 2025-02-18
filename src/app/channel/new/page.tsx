@@ -1,4 +1,6 @@
 import SessionRedirect from "@/components/SessionRedirect";
+import CreateChannelForm from "./CreateChannelForm";
+import Navbar from "@/components/Navbar";
 
 const Page = () => {
   return (
@@ -7,7 +9,8 @@ const Page = () => {
         callbackUrl="/channel/new"
         message="You need to login to create a channel"
       />
-      Page
+      <Navbar withoutButtons />
+      <CreateChannelForm />
     </div>
   );
 };

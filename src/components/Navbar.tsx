@@ -1,10 +1,8 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,7 +16,7 @@ const Navbar = ({
   withoutButtons?: boolean;
   className?: string;
 }) => {
-  const { data: session } = useSession();
+  const { status } = useSession();
   const pathName = usePathname();
   return (
     <nav
@@ -40,7 +38,7 @@ const Navbar = ({
         <ThemeSwitch />
         {!withoutButtons && (
           <div>
-            {session?.user?.email ? (
+            {status === "authenticated" ? (
               <div className="group">
                 <Link
                   className={buttonVariants({
@@ -54,7 +52,7 @@ const Navbar = ({
                   <ArrowRight className="ml-1.5 size-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
-            ) : (
+            ) : status === "unauthenticated" ? (
               <CustomButton
                 className="group flex items-center dark:text-white"
                 onClick={() =>
@@ -66,6 +64,13 @@ const Navbar = ({
                 Login
                 <ArrowRight className="ml-1.5 inline-block size-4 transition-transform group-hover:translate-x-1" />
               </CustomButton>
+            ) : (
+              <CustomButton
+                className="group flex items-center dark:text-white"
+                disabled
+              >
+                <Loader2 className="size-5 animate-spin" />
+              </CustomButton>
             )}
           </div>
         )}
@@ -74,4 +79,4 @@ const Navbar = ({
   );
 };
 
-export default dynamic(() => Promise.resolve(Navbar), { ssr: false });
+export default Navbar;
