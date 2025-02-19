@@ -1,28 +1,19 @@
+"use client";
+
 import ChannelsList from "@/components/ChannelsList";
 import BentoElem from "./BentoElem";
+import { trpc } from "@/lib/trpc/client";
 
 const DashboardContent = () => {
+  const { data: channels, isLoading: isChannelsLoading } =
+    trpc.channelRouter.getChannelsForUser.useQuery();
   return (
     <div className="grid h-full grid-cols-1 grid-rows-4 gap-3 rounded-lg p-5 dark:bg-zinc-900 md:grid-cols-2 md:grid-rows-2">
       <div className="rounded-[1%] rounded-t-2xl bg-slate-50 ring-1 ring-black/20 dark:bg-zinc-950 dark:ring-white/10 md:rounded-tl-2xl md:rounded-tr-[1%]">
-        <BentoElem address="/channels" heading="Channels">
+        <BentoElem address="/channels/my" heading="Channels">
           <ChannelsList
-            channels={[
-              {
-                id: "apple",
-                brief: "The awesome channel",
-                descriptor: ":awesme-chnl",
-                name: "Awesome Channel",
-                permissions: {},
-              },
-              {
-                id: "banana",
-                brief: "The amazing channel",
-                descriptor: ":amz-in-g",
-                name: "Amazing Channel",
-                permissions: {},
-              },
-            ]}
+            isLoading={isChannelsLoading}
+            channels={channels ?? []}
           />
         </BentoElem>
       </div>

@@ -31,4 +31,16 @@ export const channelRouter = router({
         },
       });
     }),
+  getChannelsForUser: privateProcedure.query(async ({ ctx }) => {
+    const { user } = ctx;
+    return await db.channel.findMany({
+      where: {
+        members: {
+          some: {
+            id: user.id,
+          },
+        },
+      },
+    });
+  }),
 });
