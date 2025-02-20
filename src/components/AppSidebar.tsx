@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -20,11 +22,13 @@ import {
   UserRoundCog,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import LogoutButton from "./auth/LogoutButton";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 
 const AppSidebar = ({ user }: { user: User }) => {
+  const pathname = usePathname();
   return (
     <Sidebar
       className="border-none bg-white dark:bg-sidebar"
@@ -56,7 +60,8 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  isActive={pathname === "/feed"}
+                  className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                   tooltip="feed"
                 >
@@ -72,7 +77,8 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  isActive={pathname === "/channels"}
+                  className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                   tooltip="channels"
                 >
@@ -88,7 +94,8 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  isActive={pathname === "/posts"}
+                  className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                   tooltip="posts"
                 >
@@ -104,7 +111,8 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  isActive={pathname === "/stats"}
+                  className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                   tooltip="stats"
                 >
@@ -124,7 +132,8 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  isActive={pathname === "/account-settings"}
+                  className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                 >
                   <Link href="/account-settings">
@@ -139,7 +148,8 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  isActive={pathname === "/app-settings"}
+                  className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                 >
                   <Link href="/app-settings">
@@ -157,7 +167,7 @@ const AppSidebar = ({ user }: { user: User }) => {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton
-                className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                 asChild
               >
                 <LogoutButton />

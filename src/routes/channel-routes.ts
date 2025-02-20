@@ -43,4 +43,30 @@ export const channelRouter = router({
       },
     });
   }),
+  getRecommendedChannelsForUser: privateProcedure.query(async () => {
+    // TODO: Get actually recommended channels
+    return [
+      {
+        brief: "A channel for all things tech",
+        descriptor: ":tech",
+        name: "Tech",
+        id: "1",
+        permissions: {},
+      },
+      {
+        brief: "A channel for all things gaming",
+        descriptor: ":gaming",
+        name: "Gaming",
+        id: "2",
+        permissions: {},
+      },
+      {
+        brief: "A channel for all things music",
+        descriptor: ":music",
+        name: "Music",
+        id: "3",
+        permissions: {},
+      },
+    ];
+  }),
 });

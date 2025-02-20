@@ -39,7 +39,7 @@ const ChannelsList = ({
               className="group flex items-center justify-between"
               href={`/channel/${channel.descriptor.slice(1)}`}
             >
-              <div className="space-y-2">
+              <div className="max-w-[60%] space-y-2">
                 <p className="group-hover:underline">{channel.name}</p>
                 <p className="hidden text-pretty text-base/7 text-muted-foreground md:block">
                   {channel.brief}
