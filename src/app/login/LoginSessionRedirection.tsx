@@ -1,6 +1,6 @@
 "use client";
 
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import CustomButton from "@/components/ui/CustomButton";
 import {
   Form,
@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { trpc } from "@/lib/trpc/client";
-import { cn } from "@/lib/utils";
 import {
   newAccountFormValidator,
   NewAccountFormValidatorType,
@@ -92,7 +91,7 @@ const LoginSessionRedirection = ({
   };
 
   return (
-    <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg bg-white px-5 dark:bg-zinc-800">
+    <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg bg-white px-5 dark:bg-slate-800">
       {status === "pending" && !needsCreation && (
         <div className="flex flex-col items-center justify-center gap-3">
           <Loader2 className="size-8 animate-spin" />
@@ -157,20 +156,12 @@ const LoginSessionRedirection = ({
             </Form>
             <p className="mt-5 text-sm text-muted-foreground">
               By creating account, you agree to our{" "}
-              <Link
-                className={cn(
-                  buttonVariants({
-                    variant: "link",
-                    className: "underline",
-                  }),
-                  "px-0",
-                )}
-                target="_blank"
-                href="/toc"
-              >
-                Terms and Conditions
-                <ExternalLink className="size-2" />
-              </Link>
+              <Button asChild variant="link" className="px-0 underline">
+                <Link target="_blank" href="/toc">
+                  Terms and Conditions
+                  <ExternalLink className="size-2" />
+                </Link>
+              </Button>
             </p>
           </div>
         )

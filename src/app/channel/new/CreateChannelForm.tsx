@@ -66,7 +66,7 @@ const CreateChannelForm = () => {
 
   return (
     <Form {...form}>
-      <main className="mx-auto max-w-prose rounded-lg border border-black/20 px-5 py-4 shadow-md dark:border-white/10 dark:bg-zinc-900">
+      <main className="mx-auto max-w-prose rounded-lg border border-black/20 bg-white/70 px-5 py-4 shadow-md dark:border-white/10 dark:bg-slate-800">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-5"
@@ -117,7 +117,7 @@ const CreateChannelForm = () => {
             name="brief"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Descriptor</FormLabel>
+                <FormLabel>Brief</FormLabel>
                 <FormControl>
                   <Textarea {...field} />
                 </FormControl>

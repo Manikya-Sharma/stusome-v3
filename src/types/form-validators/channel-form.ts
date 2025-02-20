@@ -9,7 +9,10 @@ export const newChannelFormValidator = z.object({
       /^[A-Za-z0-9\_\-]+$/,
       "channel descriptor can only contain numbers, ascii letters, underscore and dashes",
     ),
-  brief: z.string().min(10, "Brief must have at-least 10 characters"),
+  brief: z
+    .string()
+    .min(5, "Brief must have at-least 5 characters")
+    .max(20, "Brief cannot be more than 20 characters"),
 });
 
 export type NewChannelFormValidatorType = z.infer<

@@ -20,17 +20,20 @@ import {
   UserRoundCog,
 } from "lucide-react";
 import Link from "next/link";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./auth/LogoutButton";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 
 const AppSidebar = ({ user }: { user: User }) => {
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar
+      className="border-none bg-white dark:bg-sidebar"
+      collapsible="icon"
+    >
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent className="group-data-[collapsible=icon]:hidden">
-            <div className="flex h-auto w-full items-center justify-between rounded-lg border border-gray-400 bg-white p-3 dark:border-gray-600 dark:bg-zinc-900">
+            <div className="flex h-auto w-full items-center justify-between rounded-lg border border-gray-400 bg-white p-3 dark:border-gray-600 dark:bg-slate-800">
               <div className="flex flex-col gap-1 group-data-[collapsible=icon]:hidden">
                 <span>{user.displayName}</span>
                 <span className="text-sm text-muted-foreground">
@@ -52,7 +55,11 @@ const AppSidebar = ({ user }: { user: User }) => {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  asChild
+                  tooltip="feed"
+                >
                   <Link href="/feed">
                     <NotebookText className="mr-1.5 size-5" />
                     <span>Feed</span>
@@ -64,7 +71,11 @@ const AppSidebar = ({ user }: { user: User }) => {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  asChild
+                  tooltip="channels"
+                >
                   <Link href="/channels">
                     <Orbit className="mr-1.5 size-5" />
                     <span>Channels</span>
@@ -76,7 +87,11 @@ const AppSidebar = ({ user }: { user: User }) => {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  asChild
+                  tooltip="posts"
+                >
                   <Link href="/posts">
                     <Palette className="mr-1.5 size-5" />
                     <span>Posts</span>
@@ -88,7 +103,11 @@ const AppSidebar = ({ user }: { user: User }) => {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  asChild
+                  tooltip="stats"
+                >
                   <Link href="/stats">
                     <ChartScatter className="mr-1.5 size-5" />
                     <span>Profile Stats</span>
@@ -104,7 +123,10 @@ const AppSidebar = ({ user }: { user: User }) => {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  asChild
+                >
                   <Link href="/account-settings">
                     <UserRoundCog className="mr-1.5 size-5" />
                     <span>Account settings</span>
@@ -116,7 +138,10 @@ const AppSidebar = ({ user }: { user: User }) => {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton
+                  className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                  asChild
+                >
                   <Link href="/app-settings">
                     <Settings className="mr-1.5 size-5" />
                     <span>App settings</span>
@@ -131,7 +156,10 @@ const AppSidebar = ({ user }: { user: User }) => {
         <SidebarContent>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton
+                className="hover:bg-slate-200 dark:hover:bg-slate-700"
+                asChild
+              >
                 <LogoutButton />
               </SidebarMenuButton>
             </SidebarMenuItem>

@@ -1,7 +1,7 @@
 "use client";
 
 import { LogOut } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
 
 const LogoutButton = () => {
@@ -9,7 +9,7 @@ const LogoutButton = () => {
     <Button
       variant="destructive"
       size="icon"
-      className="w-full"
+      className="w-full bg-sidebar"
       onClick={() => signOut({ redirectTo: "/login" })}
     >
       <LogOut className="mr-1.5 size-5 group-data-[collapsible=icon]:mr-0" />

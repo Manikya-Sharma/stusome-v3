@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
   return (
-    <div className="flex items-center">
+    <div className="flex h-7 items-center">
       {theme === "dark" ? (
         <Button variant="ghost" size="icon" onClick={() => setTheme("light")}>
           <Sun className="size-4" />

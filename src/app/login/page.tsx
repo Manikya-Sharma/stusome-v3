@@ -8,7 +8,7 @@ import ToastMessage from "./ToastMessage";
 const Page = async () => {
   const session = await auth();
   return (
-    <div className="relative min-h-screen w-full bg-blue-50 dark:bg-zinc-900">
+    <div className="relative min-h-screen w-full">
       {session?.user?.email && session.user.id ? (
         <LoginSessionRedirection
           profilePicture={session.user.image ?? undefined}
@@ -19,7 +19,7 @@ const Page = async () => {
         <>
           <Navbar className="bg-transparent" withoutButtons />
           <ToastMessage />
-          <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-sm bg-white dark:bg-zinc-800 md:w-[70vw]">
+          <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-sm bg-white dark:bg-slate-800 md:w-[70vw]">
             <div className="flex-1 px-10 pt-20">
               <h1 className="text-4xl font-semibold tracking-tight">
                 Welcome to Stusome

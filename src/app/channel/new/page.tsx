@@ -1,4 +1,4 @@
-import SessionRedirect from "@/components/SessionRedirect";
+import SessionRedirect from "@/components/auth/SessionRedirect";
 import CreateChannelForm from "./CreateChannelForm";
 import Navbar from "@/components/Navbar";
 

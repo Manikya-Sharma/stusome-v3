@@ -1,12 +1,12 @@
 "use server";
 
 import AppSidebar from "@/components/AppSidebar";
+import ThemeSwitch from "@/components/ThemeSwitch";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { notFound, redirect } from "next/navigation";
 import Pathname from "./Pathname";
-import ThemeSwitch from "@/components/ThemeSwitch";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
@@ -29,7 +29,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     <div>
       <SidebarProvider>
         <AppSidebar user={user} />
-        <main className="w-full dark:bg-zinc-900">
+        <main className="w-full">
           <div className="flex items-center gap-2 py-2">
             <SidebarTrigger />
             <h1 className="text-xl font-semibold tracking-tight">
@@ -40,7 +40,9 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
 
-          <div className="h-[calc(100vh-52px)] overflow-y-auto">{children}</div>
+          <div className="overflow-y-auto md:h-[calc(100vh-60px)]">
+            {children}
+          </div>
         </main>
       </SidebarProvider>
     </div>

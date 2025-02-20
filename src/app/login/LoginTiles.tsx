@@ -10,7 +10,6 @@ const LoginTiles = () => {
   return (
     <div className="flex flex-col items-center gap-5">
       <Button
-        className="border border-slate-800 hover:bg-slate-800 hover:text-white dark:border-slate-500 dark:hover:bg-slate-600"
         size="lg"
         variant="secondary"
         onClick={async () => {
@@ -20,9 +19,9 @@ const LoginTiles = () => {
         }}
       >
         {loading === "github" ? (
-          <Loader2 className="size-7 animate-spin" />
+          <Loader2 className="size-5 animate-spin" />
         ) : (
-          <Github className="size-7" />
+          <Github className="size-5" />
         )}
         Continue with GitHub
       </Button>
