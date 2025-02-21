@@ -12,6 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/hooks/use-toast";
 import { trpc } from "@/lib/trpc/client";
 import {
   newAccountFormValidator,
@@ -19,6 +20,7 @@ import {
 } from "@/types/form-validators/account-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ExternalLink, Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,15 +28,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 // The purpose is to ensure that logged in use is in the database
-const LoginSessionRedirection = ({
-  email,
-  userId,
-  profilePicture,
-}: {
-  email: string;
-  userId: string;
-  profilePicture: string | undefined;
-}) => {
+const LoginSessionRedirection = () => {
+  const { data: session } = useSession();
   // state to determine if the user needs to create a new account for our database
   const [needsCreation, setNeedsCreation] = useState<boolean>(false);
   // state to determine if the username entered is unique
@@ -81,17 +76,26 @@ const LoginSessionRedirection = ({
     username,
     displayName,
   }: z.infer<typeof newAccountFormValidator>) => {
+    if (!session?.user?.email || !session?.user?.id) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description:
+          "An error occurred, please try again after clearing browser cache",
+      });
+      return;
+    }
     createAccount({
       displayName,
-      email,
-      externalId: userId,
+      email: session?.user?.email,
+      externalId: session?.user?.id,
       username,
-      profilePicture,
+      profilePicture: session.user.image ?? "",
     });
   };
 
   return (
-    <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[70vw] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg bg-white px-5 dark:bg-slate-800">
+    <div className="flex h-full w-full items-center justify-center">
       {status === "pending" && !needsCreation && (
         <div className="flex flex-col items-center justify-center gap-3">
           <Loader2 className="size-8 animate-spin" />
@@ -166,7 +170,7 @@ const LoginSessionRedirection = ({
           </div>
         )
       ) : null}
-    </main>
+    </div>
   );
 };
 

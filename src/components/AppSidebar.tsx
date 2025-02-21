@@ -11,9 +11,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import type { User } from "@prisma/client";
+import { User } from "@prisma/client";
 import {
   ChartScatter,
+  House,
   NotebookText,
   Orbit,
   Palette,
@@ -60,7 +61,24 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  isActive={pathname === "/feed"}
+                  isActive={/\/dashboard*/.test(pathname)}
+                  className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
+                  asChild
+                  tooltip="dashboard"
+                >
+                  <Link href="/feed">
+                    <House className="mr-1.5 size-5" />
+                    <span>Dashboard</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  isActive={/\/feed*/.test(pathname)}
                   className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                   tooltip="feed"
@@ -77,7 +95,7 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  isActive={pathname === "/channels"}
+                  isActive={/\/channels*/.test(pathname)}
                   className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                   tooltip="channels"
@@ -94,7 +112,7 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  isActive={pathname === "/posts"}
+                  isActive={/\/posts*/.test(pathname)}
                   className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                   tooltip="posts"
@@ -111,7 +129,7 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  isActive={pathname === "/stats"}
+                  isActive={/\/stats*/.test(pathname)}
                   className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                   tooltip="stats"
@@ -132,7 +150,7 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  isActive={pathname === "/account-settings"}
+                  isActive={/\/account\-settings*/.test(pathname)}
                   className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                 >
@@ -148,7 +166,7 @@ const AppSidebar = ({ user }: { user: User }) => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  isActive={pathname === "/app-settings"}
+                  isActive={/\/app\-settings*/.test(pathname)}
                   className="my-[3px] hover:bg-slate-200 dark:hover:bg-slate-700"
                   asChild
                 >

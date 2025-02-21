@@ -1,34 +1,25 @@
 "use server";
 
-import AppSidebar from "@/components/AppSidebar";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import Pathname from "./Pathname";
+import AppSidebar from "@/components/AppSidebar";
+import { trpc } from "@/lib/trpc/server";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await auth();
-
-  if (!session || !session.user || !session.user.email) {
-    return notFound();
-  }
-
-  const user = await db.user.findFirst({
-    where: {
-      email: session.user.email,
-    },
-  });
-
+  const user = await auth();
   if (!user) {
-    return redirect("/login");
+    redirect(
+      encodeURI(`/login?callbackUrl=/dashboard&message=Login to continue`),
+    );
   }
-
+  const dbUser = await trpc.authRouter.getProfile();
   return (
     <div>
       <SidebarProvider>
-        <AppSidebar user={user} />
+        <AppSidebar user={dbUser} />
         <main className="w-full">
           <div className="flex items-center gap-2 py-2">
             <SidebarTrigger />

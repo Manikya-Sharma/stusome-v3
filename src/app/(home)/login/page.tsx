@@ -1,6 +1,5 @@
 import { auth } from "@/lib/auth";
 import Link from "next/link";
-import Navbar from "../../components/Navbar";
 import LoginSessionRedirection from "./LoginSessionRedirection";
 import LoginTiles from "./LoginTiles";
 import ToastMessage from "./ToastMessage";
@@ -8,18 +7,13 @@ import ToastMessage from "./ToastMessage";
 const Page = async () => {
   const session = await auth();
   return (
-    <div className="relative min-h-screen w-full">
-      {session?.user?.email && session.user.id ? (
-        <LoginSessionRedirection
-          profilePicture={session.user.image ?? undefined}
-          email={session.user.email}
-          userId={session.user.id}
-        />
-      ) : (
-        <>
-          <Navbar className="bg-transparent" withoutButtons />
-          <ToastMessage />
-          <main className="absolute left-1/2 top-1/2 mt-7 flex h-[85vh] w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-sm bg-white dark:bg-slate-800 md:w-[70vw]">
+    <div className="flex h-full w-full flex-col items-center justify-center">
+      <main className="-mt-5 flex h-[80%] w-[90vw] rounded-sm bg-white dark:bg-slate-800 md:w-[70vw]">
+        {session ? (
+          <LoginSessionRedirection />
+        ) : (
+          <>
+            <ToastMessage />
             <div className="flex-1 px-10 pt-20">
               <h1 className="text-4xl font-semibold tracking-tight">
                 Welcome to Stusome
@@ -46,9 +40,9 @@ const Page = async () => {
               {/* TODO: Replace div with image */}
               <div className="h-full w-full rounded-sm rounded-tl-[7rem] bg-slate-300 dark:bg-black" />
             </div>
-          </main>
-        </>
-      )}
+          </>
+        )}
+      </main>
     </div>
   );
 };
