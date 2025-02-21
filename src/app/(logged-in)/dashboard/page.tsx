@@ -1,4 +1,4 @@
-import DashboardContent from "./DashboardContent";
+import DashboardContent from "@/modules/dashboard/dashboard-view";
 
 const Page = () => {
   return <DashboardContent />;

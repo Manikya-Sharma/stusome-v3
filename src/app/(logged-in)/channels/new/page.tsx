@@ -1,4 +1,4 @@
-import CreateChannelForm from "./CreateChannelForm";
+import CreateChannelForm from "@/modules/channels/components/new-channel-form";
 
 const Page = () => {
   return (

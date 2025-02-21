@@ -1,7 +1,7 @@
 "use client";
 
 import ChannelsList from "@/components/channels/ChannelsList";
-import BentoElem from "./BentoElem";
+import BentoElem from "./components/bento-elem";
 import { trpc } from "@/lib/trpc/client";
 
 const DashboardContent = () => {

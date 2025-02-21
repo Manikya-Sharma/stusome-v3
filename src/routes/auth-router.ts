@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 import { privateProcedure, publicProcedure, router } from "@/lib/trpc/init";
 import { getDefaultProfilePreferences } from "@/lib/utils";
-import { createProfileValidator } from "@/types/validators/auth";
+import { newProfileFormValidator } from "@/types/form-validators/profile-form";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { TRPCError } from "@trpc/server";
 
@@ -10,7 +10,7 @@ export const authRouter = router({
     return ctx.user;
   }),
   createProfile: publicProcedure
-    .input(createProfileValidator)
+    .input(newProfileFormValidator)
     .mutation(async ({ input }) => {
       try {
         await db.user.create({

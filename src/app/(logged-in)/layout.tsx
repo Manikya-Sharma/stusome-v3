@@ -4,7 +4,7 @@ import ThemeSwitch from "@/components/ThemeSwitch";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import Pathname from "./Pathname";
+import Pathname from "@/modules/dashboard/pathname";
 import AppSidebar from "@/components/AppSidebar";
 import { trpc } from "@/lib/trpc/server";
 

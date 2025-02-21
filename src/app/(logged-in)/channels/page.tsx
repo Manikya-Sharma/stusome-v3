@@ -1,5 +1,5 @@
 import { HydrateClient, trpc } from "@/lib/trpc/server";
-import ChannelsContent from "./ChannelsContent";
+import ChannelsContent from "@/modules/channels/channels-view";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Loader2 } from "lucide-react";

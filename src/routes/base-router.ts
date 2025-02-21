@@ -1,6 +1,6 @@
 import { router } from "@/lib/trpc/init";
-import { authRouter } from "./auth-routes";
-import { channelRouter } from "./channel-routes";
+import { authRouter } from "./auth-router";
+import { channelRouter } from "./channel-router";
 
 export const appRouter = router({
   authRouter,
