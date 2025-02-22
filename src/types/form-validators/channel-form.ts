@@ -5,6 +5,7 @@ export const newChannelFormValidator = z.object({
   descriptor: z
     .string()
     .min(4, "Descriptor must have at-least 4 characters")
+    .max(20, "Descriptor cannot be more than 20 characters")
     .regex(
       /^[A-Za-z0-9\_\-]+$/,
       "channel descriptor can only contain numbers, ascii letters, underscore and dashes",
@@ -12,7 +13,7 @@ export const newChannelFormValidator = z.object({
   brief: z
     .string()
     .min(5, "Brief must have at-least 5 characters")
-    .max(20, "Brief cannot be more than 20 characters"),
+    .max(40, "Brief cannot be more than 40 characters"),
 });
 
 export type NewChannelFormValidatorType = z.infer<
