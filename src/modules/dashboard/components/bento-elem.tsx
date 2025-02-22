@@ -13,7 +13,7 @@ const BentoElem = ({
 }) => {
   return (
     <section className="relative h-full overflow-auto p-3 pt-0">
-      <div className="sticky top-0 z-10">
+      <div className="sticky top-0 z-10 bg-slate-50 dark:bg-slate-800">
         <h2 className="flex items-center justify-between pt-3">
           <span className="text-lg font-semibold tracking-tight">
             {heading}

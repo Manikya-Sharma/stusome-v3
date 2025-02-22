@@ -66,7 +66,7 @@ const AppSidebar = ({ user }: { user: User }) => {
                   asChild
                   tooltip="dashboard"
                 >
-                  <Link href="/feed">
+                  <Link href="/dashboard">
                     <House className="mr-1.5 size-5" />
                     <span>Dashboard</span>
                   </Link>

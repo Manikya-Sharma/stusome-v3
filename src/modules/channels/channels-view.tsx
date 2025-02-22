@@ -1,11 +1,13 @@
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Orbit, PlusCircle, Sparkles } from "lucide-react";
+import Link from "next/link";
 import { RecommendedChannels } from "./components/recommended-channels";
 import { UserChannels } from "./components/user-channels";
-import { Orbit, Sparkles } from "lucide-react";
 
 const ChannelsContent = () => {
   return (
-    <main className="mx-auto flex h-full max-w-prose gap-5 px-10 pt-2">
+    <main className="mx-auto h-full max-w-prose px-10 pt-2">
       <Tabs defaultValue="my" className="mx-auto w-full max-w-[80vw]">
         <TabsList className="mb-3 w-full justify-around bg-slate-300 dark:bg-slate-800">
           <TabsTrigger
@@ -30,6 +32,12 @@ const ChannelsContent = () => {
           <RecommendedChannels />
         </TabsContent>
       </Tabs>
+      <Button asChild className="mt-10 w-full" size="lg">
+        <Link href="/channels/new">
+          <PlusCircle className="mr-1.5 inline-block size-5" />
+          Create a new Channel
+        </Link>
+      </Button>
     </main>
   );
 };
